@@ -11,7 +11,7 @@ public class TimePlatformTrap : MonoBehaviour
         rend = GetComponent<Renderer>();
     }
 
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (isTrapActive && other.gameObject.CompareTag("Player"))
         {
