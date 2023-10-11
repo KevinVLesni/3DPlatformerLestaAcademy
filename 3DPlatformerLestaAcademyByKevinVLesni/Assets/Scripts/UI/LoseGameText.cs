@@ -22,5 +22,6 @@ public class LoseGameText : MonoBehaviour
     void Die()
     {
         objectToActivate.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

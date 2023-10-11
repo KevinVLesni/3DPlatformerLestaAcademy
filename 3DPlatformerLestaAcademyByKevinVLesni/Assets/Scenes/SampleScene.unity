@@ -1665,7 +1665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1551078497}
-  offset: {x: 0, y: 0, z: 0}
+  sensivityMouse: 200
 --- !u!1 &1041425839
 GameObject:
   m_ObjectHideFlags: 0
