@@ -2,64 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public float Speed = 10f;
-    public float JumpForce = 300f;
+    private Rigidbody rb;
+    public float speed = 0.5f;
+    private Vector3 moveVector;
+    public float jumpForce;
+    public bool isGround;
+    public Vector3 jump;
 
-    // Required tag "Ground" for work
-    private bool _isGrounded;
-    private Rigidbody _rb;
-
-    void Start()
+    void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        MovementLogic();
-        JumpLogic();
-    }
 
-    private void MovementLogic()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-        _rb.velocity = movement * Speed;
-    }
-
-
-    private void JumpLogic()
-    {
-        if (Input.GetAxis("Jump") > 0)
+        GetInput();
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-            if (_isGrounded)
-            {
-                _rb.AddForce(Vector3.up * JumpForce);
-            }
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        }
+
+
+
+    }
+    private void GetInput()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.localPosition += transform.forward * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.localPosition += -transform.forward * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.localPosition += transform.right * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.localPosition += -transform.right * speed * Time.deltaTime;
         }
     }
-
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        IsGroundedUpdate(collision, true);
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        IsGroundedUpdate(collision, false);
-    }
-
-    private void IsGroundedUpdate(Collision collision, bool value)
-    {
-        if (collision.gameObject.tag == ("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            _isGrounded = value;
+            isGround = true;
+        }
+
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGround = false;
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
