@@ -59,8 +59,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGround = false;
+            Invoke("SetIsGroundFalse", 0.1f); 
         }
+    }
+
+    private void SetIsGroundFalse()
+    {
+        isGround = false;
     }
 }
 
