@@ -5,12 +5,10 @@ public class TimePlatformTrap : MonoBehaviour
 {
     private Renderer rend;
     private bool isTrapActive = true;
-    private GameObject objectToActivate;
 
     void Start()
     {
         rend = GetComponent<Renderer>();
-        objectToActivate = this.gameObject;
     }
 
     void OnCollisionEnter(Collision other)
@@ -29,18 +27,14 @@ public class TimePlatformTrap : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         rend.material.color = Color.red;
+        // TODO: Reload Scene
 
-        yield return new WaitForSeconds(0.2f);
-        objectToActivate.SetActive(false);
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         rend.material.color = orange;
-        objectToActivate.SetActive(true);
-        
+
         yield return new WaitForSeconds(5f);
         rend.material.color = Color.white;
         isTrapActive = true;
-        objectToActivate.SetActive(true);
     }
 }
