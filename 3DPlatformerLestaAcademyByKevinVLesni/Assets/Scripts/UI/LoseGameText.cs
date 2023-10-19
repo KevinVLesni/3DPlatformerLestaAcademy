@@ -23,5 +23,6 @@ public class LoseGameText : MonoBehaviour
     {
         objectToActivate.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 0f;
     }
 }
