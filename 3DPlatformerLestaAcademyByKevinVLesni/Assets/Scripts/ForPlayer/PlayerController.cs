@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    public TimePlatformTrap TPT;
     public float speed = 0.5f;
     private Vector3 moveVector;
     public float jumpForce;
@@ -15,7 +14,6 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        TPT = GetComponent<TimePlatformTrap>();
     }
 
     void Update()
@@ -65,7 +63,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetIsGroundFalse()
+    private void SetIsGroundFalse()
     {
         isGround = false;
     }

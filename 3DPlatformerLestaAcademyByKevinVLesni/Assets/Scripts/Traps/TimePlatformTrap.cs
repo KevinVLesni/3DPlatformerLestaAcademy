@@ -1,20 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-
-
 public class TimePlatformTrap : MonoBehaviour
 {
     private Renderer rend;
     private bool isTrapActive = true;
-    private GameObject objectToActivate;
-    public PlayerController playerController;
-     LoseGameText loseGameText;
 
     void Start()
     {
         rend = GetComponent<Renderer>();
-        objectToActivate = this.gameObject;
     }
 
     void OnCollisionEnter(Collision other)
@@ -33,23 +27,14 @@ public class TimePlatformTrap : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         rend.material.color = Color.red;
-        loseGameText.Die();
-        
-        
+        // TODO: Reload Scene
 
-
-
-
+        yield return new WaitForSeconds(0.1f);
 
         rend.material.color = orange;
-        yield return new WaitForSeconds(0.5f);
-
-        rend.material.color = orange;
-        
 
         yield return new WaitForSeconds(5f);
         rend.material.color = Color.white;
         isTrapActive = true;
-        
     }
 }
