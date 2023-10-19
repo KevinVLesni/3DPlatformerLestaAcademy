@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WinterZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector3 windDirection = new Vector3(1, 0, 0);
+    public float windStrength = 10.0f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForce(windDirection * windStrength);
+        }
     }
 }
